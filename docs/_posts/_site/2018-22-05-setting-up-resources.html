@@ -1,0 +1,87 @@
+<h2 id="example-on-10x-pbmc-data">Example on 10x PBMC data</h2>
+
+<h2 id="basic-requirements">Basic Requirements:</h2>
+<ul>
+  <li>Salmon v0.14.1 Binary.</li>
+  <li>Reference transcriptome.</li>
+  <li>Transcript to Gene Mapping.</li>
+  <li>Raw <em>fastq</em> files.</li>
+</ul>
+
+<h3 id="salmon-binary">Salmon Binary</h3>
+<p>There are multiple ways to install alevin:</p>
+
+<ul>
+  <li>Using Conda (Recommended)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">conda</span> <span class="n">install</span> <span class="n">salmon</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Using prebuild binary (only for linux and Mac-osx):</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">COMBINE</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">salmon</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v0</span><span class="o">.</span><span class="mf">14.1</span><span class="o">/</span><span class="n">salmon</span><span class="o">-</span><span class="mf">0.14</span><span class="o">.</span><span class="mi">1</span><span class="n">_linux_x86_64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">xvzf</span> <span class="n">salmon</span><span class="o">-</span><span class="mf">0.14</span><span class="o">.</span><span class="mi">1</span><span class="n">_linux_x86_64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Compiling from Source:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">COMBINE</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">salmon</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">salmon</span><span class="p">;</span> <span class="n">mkdir</span> <span class="n">build</span><span class="p">;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span>
+<span class="n">make</span> <span class="n">install</span>
+</code></pre>
+</div>
+
+<p><em>Note:</em> if you find problem installing salmon binary, please raise an issue (following the issue-template) on github <a href="https://github.com/COMBINE-lab/salmon/issues">here</a>.</p>
+
+<h3 id="reference-transcriptome">Reference Transcriptome</h3>
+
+<p>Alevin uses the same framework as Salmon to make index of the reference transcriptome and hence requires no extra flags or customization for the indexing stage.</p>
+
+<p>In our tutorial we are working on <code class="highlighter-rouge">PBMC</code> data and will download human transcriptome. For example, we are downloading trancriptome with transcripts from protein-coding genes only as follows:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">wget</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">ebi</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">databases</span><span class="o">/</span><span class="n">gencode</span><span class="o">/</span><span class="n">Gencode_human</span><span class="o">/</span><span class="n">release_31</span><span class="o">/</span><span class="n">gencode</span><span class="o">.</span><span class="n">v31</span><span class="o">.</span><span class="n">pc_transcripts</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+</code></pre>
+</div>
+
+<p>Once we have the reference-transcriptome, alevin index can be created using the following command:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="n">salmon</span> <span class="n">index</span> <span class="o">-</span><span class="n">i</span> <span class="n">index</span> <span class="o">-</span><span class="n">k</span> <span class="mi">31</span> <span class="o">--</span><span class="n">gencode</span> <span class="o">-</span><span class="n">p</span> <span class="mi">4</span> <span class="o">-</span><span class="n">t</span> <span class="n">gencode</span><span class="o">.</span><span class="n">v31</span><span class="o">.</span><span class="n">pc_transcripts</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+</code></pre>
+</div>
+<p>This command will build the alevin index inside the folder <code class="highlighter-rouge">index</code> in your current working directory.</p>
+
+<h3 id="transcript-to-gene-mapping">Transcript to Gene Mapping</h3>
+<p>Alevin works on transcript level equivalence classes to resolves potential UMI collision, while it also benefits from transcript to gene relation by sharing the information among the equivalene classes form one gene – hence the need for a map from transcript id to gene-ids. Alevin requires the user to input a <em>tab</em> separated (one transcript-gene pair per line) file. For our-example we can extract the exact file using the following command for the <code class="highlighter-rouge">GTF</code> file downloaded from <a href="ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_31/gencode.v31.primary_assembly.annotation.gtf.gz">here</a>.</p>
+
+<p>NOTE: Already have a transcript to gene mapping file for all the transcripts in the reference transcriptome ? If yes, then we can skip this step.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">bioawk</span> <span class="o">-</span><span class="n">c</span> <span class="n">gff</span> <span class="s">'$feature=="transcript" {print $group}'</span> <span class="o">&lt;</span><span class="p">(</span><span class="n">gunzip</span> <span class="o">-</span><span class="n">c</span> <span class="n">gencode</span><span class="o">.</span><span class="n">v31</span><span class="o">.</span><span class="n">primary_assembly</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="n">gtf</span><span class="o">.</span><span class="n">gz</span><span class="p">)</span> <span class="o">|</span> <span class="n">awk</span> <span class="o">-</span><span class="n">F</span> <span class="s">' '</span> <span class="s">'{print substr($4,2,length($4)-3) "</span><span class="se">\t</span><span class="s">" substr($2,2,length($2)-3)}'</span> <span class="o">-</span> <span class="o">&gt;</span> <span class="n">txp2gene</span><span class="o">.</span><span class="n">tsv</span>
+</code></pre>
+</div>
+
+<p>The above script, all it does is subsample the <code class="highlighter-rouge">transcript</code> feature from the <em>GTF</em> and dumps the corresponding txp-gene-ids pair in a <em>tab separated file (tsv)</em>. The mapping file for <code class="highlighter-rouge">gencode</code> based human reference transcriptome would look something like the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ENST00000456328.2       ENSG00000223972.5
+ENST00000450305.2       ENSG00000223972.5
+ENST00000488147.1       ENSG00000227232.5
+ENST00000619216.1       ENSG00000278267.1
+ENST00000473358.1       ENSG00000243485.5
+ENST00000469289.1       ENSG00000243485.5
+</code></pre>
+</div>
+
+<h3 id="dowloading-raw-fastq">Dowloading Raw-Fastq</h3>
+
+<p>Raw Fastq file can be downloaded from the 10x-Genomics Support website from <a href="https://support.10xgenomics.com/single-cell-gene-expression/datasets/2.1.0/pbmc4k">here</a>. You might have to provide your email-id and register to download the raw-fastqs.</p>
+
+<h3 id="ipython-notebook">Ipython Notebook</h3>
+<p>Prefer to read ipython notebook ?
+Check out the gist <a href="https://gist.github.com/k3yavi/c501705ed2d29b12b0d10cf78b3ed001">here</a>.</p>

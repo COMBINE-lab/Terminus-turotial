@@ -1,0 +1,52 @@
+<h2 id="fast-is-good-but-fast-and-accurate-is-better-">Fast is Good but Fast and accurate is better !</h2>
+
+<p>The accuracy of transcript quantification using RNA-seq data depends on many factors, such as the choice of alignment or mapping method and the quantification model being adopted. After investigating the influence of mapping and alignment on the accuracy of transcript quantification in both simulated and experimental data, as well as the effect on subsequent differential expression analysis, we designed selective alignment method which overcomes the shortcomings of lightweight approaches without incurring the computational cost of traditional alignment. Here we give a short tutorial on how to index your genome and transcriptome to get the accurate quantification estimates.</p>
+
+<h3 id="downloading-reference">Downloading Reference</h3>
+
+<p>We are first going to download the reference transcriptome and genome for salmon index. As an example we are downloading the gencode mouse reference</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">wget</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">ebi</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">databases</span><span class="o">/</span><span class="n">gencode</span><span class="o">/</span><span class="n">Gencode_mouse</span><span class="o">/</span><span class="n">release_M23</span><span class="o">/</span><span class="n">gencode</span><span class="o">.</span><span class="n">vM23</span><span class="o">.</span><span class="n">transcripts</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">wget</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">ebi</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">databases</span><span class="o">/</span><span class="n">gencode</span><span class="o">/</span><span class="n">Gencode_mouse</span><span class="o">/</span><span class="n">release_M23</span><span class="o">/</span><span class="n">GRCm38</span><span class="o">.</span><span class="n">primary_assembly</span><span class="o">.</span><span class="n">genome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+</code></pre>
+</div>
+
+<h3 id="installing-salmon">Installing Salmon</h3>
+
+<p>Although there are mutliple ways to download salmon (ex: binary from github, docker image), we are going to install it through conda. Assuming a conda environment is already set up, we can install salmon through following command:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">channel</span> <span class="n">bioconda</span> <span class="n">salmon</span>
+</code></pre>
+</div>
+
+<p>Make sure you have the latest version of salmon (v1.0 as on November 1st, 2019) by using <code class="highlighter-rouge">salmon --version</code></p>
+
+<h3 id="preparing-metadata">Preparing metadata</h3>
+
+<p>Salmon indexing requires the names of the genome targets, which is extractable by using the <code class="highlighter-rouge">grep</code> command:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">grep</span> <span class="s">"^&gt;"</span> <span class="o">&lt;</span><span class="p">(</span><span class="n">gunzip</span> <span class="o">-</span><span class="n">c</span> <span class="n">GRCm38</span><span class="o">.</span><span class="n">primary_assembly</span><span class="o">.</span><span class="n">genome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span><span class="p">)</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span> <span class="s">" "</span> <span class="o">-</span><span class="n">f</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">decoys</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">sed</span> <span class="o">-</span><span class="n">i</span><span class="o">.</span><span class="n">bak</span> <span class="o">-</span><span class="n">e</span> <span class="s">'s/&gt;//g'</span> <span class="n">decoys</span><span class="o">.</span><span class="n">txt</span>
+</code></pre>
+</div>
+
+<p>Along with the list of decoys salmon also needs the concatenated transcriptome and genome reference file for index.
+NOTE: the genome targets (decoys) should come after the transcriptome targets in the reference</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">cat</span> <span class="n">gencode</span><span class="o">.</span><span class="n">vM23</span><span class="o">.</span><span class="n">transcripts</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span> <span class="n">GRCm38</span><span class="o">.</span><span class="n">primary_assembly</span><span class="o">.</span><span class="n">genome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span> <span class="o">&gt;</span> <span class="n">gentrome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+</code></pre>
+</div>
+
+<h3 id="salmon-indexing">Salmon Indexing</h3>
+
+<p>We have all the ingredients ready for the salmon recipe. We can run salmon indexing step as follows:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">salmon</span> <span class="n">index</span> <span class="o">-</span><span class="n">t</span> <span class="n">gentrome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">d</span> <span class="n">decoys</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">p</span> <span class="mi">12</span> <span class="o">-</span><span class="n">i</span> <span class="n">salmon_index</span> <span class="o">--</span><span class="n">gencode</span>
+</code></pre>
+</div>
+
+<p>NOTE: <code class="highlighter-rouge">--gencode</code> flag is for removing extra metdata in the target header separated by <code class="highlighter-rouge">|</code> from the gencode reference. You can skip it if using other references.</p>
+
+<h3 id="ipython-notebook">Ipython Notebook</h3>
+<p>Prefer to read ipython notebook ?
+Check out the gist <a href="https://gist.github.com/k3yavi/a486647c35158a8296cec543ed9b526f">here</a>.</p>

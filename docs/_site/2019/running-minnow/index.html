@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>Running Minnow</title>
+  <meta name="description" content="Installation
+
+">
+  <meta name="author" content="Combine-lab (University Of Maryland)">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Running Minnow">
+  <meta name="twitter:description" content="Installation
+
+">
+  
+  <meta name="twitter:creator" content="hrksrkr">
+  
+  <meta name="twitter:image" content="/Terminus-tutorial/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Running Minnow">
+  <meta property="og:description" content="Installation
+
+">
+  <meta property="og:image" content="/Terminus-tutorial/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/Terminus-tutorial/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/Terminus-tutorial/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/Terminus-tutorial/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Terminus-tutorial/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/Terminus-tutorial/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/Terminus-tutorial/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/Terminus-tutorial/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/Terminus-tutorial/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Terminus-tutorial/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/Terminus-tutorial/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/Terminus-tutorial/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/Terminus-tutorial/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/Terminus-tutorial/css/main.css?1580617442968111000">
+  <link rel="canonical" href="http://localhost:4000/Terminus-tutorial/2019/running-minnow/">
+  <link rel="alternate" type="application/rss+xml" title="Terminus-Tutorial" href="/Terminus-tutorial/feed.xml">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/Terminus-tutorial/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/Terminus-tutorial/" title="link to home of Terminus-Tutorial">
+          <img src="/Terminus-tutorial/images/profile.jpg" class="user-image" alt="My Profile Photo">
+					<img src="/Terminus-tutorial/images/logo.png" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Terminus-Tutorial</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">A support website for Terminus, a tool for finding data-driven, robust transcript groups from RNA-seq data</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/Terminus-tutorial/#blog" title="link to Terminus-Tutorial blog" class="blog-button">Tutorial</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+            
+              <!-- Twitter -->
+              <li class="navigation__item">
+                <a href="http://twitter.com/hrksrkr" title="@hrksrkr on Twitter" target="_blank">
+                  <i class="icon icon-social-twitter"></i>
+                  <span class="label">Twitter</span>
+                </a>
+              </li>
+            
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/COMBINE-lab" title="COMBINE-lab on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+              <!-- Email -->
+              <li class="navigation__item">
+                <a href="mailto:hsarkar@cs.umd.edu" title="Email hsarkar@cs.umd.edu" target="_blank">
+                  <i class="icon icon-mail"></i>
+                  <span class="label">Email</span>
+                </a>
+              </li>
+            
+
+            <!-- RSS -->
+            <!-- <li class="navigation__item">
+              <a href="/Terminus-tutorial/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li> -->
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-02-04 15:04" class="post-meta__date date">4 Feb 2019</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/Terminus-tutorial/tags/#minnow">minnow</a> </span>
+      
+    </div>
+    <h1 class="post-title">Running Minnow</h1>
+  </header>
+
+  <section class="post">
+    <h2 id="installation">Installation</h2>
+
+<p>Minnow is written in C++14 and tested in a ubuntu server, please let us know if you have difficulty compiling it in your own machine.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/COMBINE-lab/minnow.git
+<span class="nb">cd </span>minnow
+mkdir build
+<span class="nb">cd </span>build
+cmake ..
+make
+</code></pre>
+</div>
+<p>Given the above steps run without error, the binary will be stored within the <code class="highlighter-rouge">build/src</code>.</p>
+
+<h2 id="how-to-run-">How to run ?</h2>
+
+<h3 id="simple-runs">Simple runs</h3>
+
+<p>Minnow has many options some are basic and some are advanced, the most basic one would require to have a 
+transcript to gene map (a <code class="highlighter-rouge">tsv</code> file) and the reference file in addition to that it needs three different<br />
+files to generate data from: <code class="highlighter-rouge">quants_mat.csv</code>, a gene to cell count file (comma separated), <code class="highlighter-rouge">quants_mat_rows.txt</code>, 
+and <code class="highlighter-rouge">quants_mat_cols.txt</code>. To list the required files, a complete file tree would look like following,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+-- reference
+|   +-- transcript.fasta
+|   +-- t2g.tsv
++-- experiment
+|   +-- quants_mat.csv
+|   +-- quants_mat_rows.txt
+|   +-- quants_mat_cols.txt 
+</code></pre>
+</div>
+<p>The t2g.tsv file contains the transcript to gene information. The csv file is the main matrix file and assumed to be 
+in gene to cell format and comma separated of dimension <code class="highlighter-rouge">m * n</code> where there are <code class="highlighter-rouge">m</code> genes and <code class="highlighter-rouge">n</code> cells. In the given setting 
+one must use a <code class="highlighter-rouge">quants_mat_rows.txt</code> with <code class="highlighter-rouge">m</code> lines and <code class="highlighter-rouge">quants_mat_cols.txt</code> with <code class="highlighter-rouge">n</code> lines. Not having this convention
+might lead to failure and segmentation faults.</p>
+
+<p>The matrix can be generated in many ways, like using splatter or any generative model user might want to implement. Given 
+the above format minnow will generate the reads keeping the matrix intact. If not specified otherwise minnow generates 
+<code class="highlighter-rouge">100,000</code> molecules per cell after PCR, but this can be customized by passing the required flag with the program.</p>
+
+<p>Below we will go over the options that can be provided to minnow in order to get different functionality. Minnow 
+primarily works in two different modes. One where you can provide minnow with a simple matrix and it will with gene 
+and cell information according to above format. Additional files can be obtained from https://github.com/COMBINE-lab/minnow</p>
+
+<p>We have also linked different files in the main website.</p>
+
+<h2 id="basic-mode">Basic mode</h2>
+<p>In basic mode minnow takes a set of genes to assign them to whatever gene names that are provided to it. Please note that 
+if you are using real gene names that are present in the reference then please don’t use this mode. Since in that case 
+this mode would reassign those real gene names by it’s own algorithm and the purpose is defeated.</p>
+
+<p>One the genes are assigned, minnow uses the <code class="highlighter-rouge">weibull</code> distribution to assign reads to the candidate transcripts. A typical 
+command in normal mode might look as follows,</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --normal-mode --g2t /mnt/scratch6/avi/data/cgat/references/metadata/hg_t2g.tsv -m example_data/normal_data_100_Cells_50K_Genes/ --PCR 7 -r /mnt/scratch6/avi/data/cgat/references/txome/hg_transcriptome.fasta -e 0.01 -p 25 -o /mnt/scratch1/avi/minnow/benchmark/ismb_19_runs/splatter_test/100_50K_Genes_pbmc/defaultnorm --useWeibull
+
+</code></pre>
+</div>
+<p>Here the folder <code class="highlighter-rouge">example_data/normal_data_100_Cells_50K_Genes/</code> contains the matrix and the corresponding gene names 
+and cell names in the format shown above.</p>
+
+<h2 id="splatter-mode">Splatter-mode</h2>
+<p>The <code class="highlighter-rouge">splatter-mode</code> is very similar to the <code class="highlighter-rouge">normal-mode</code> except, the provided matrix comes from <code class="highlighter-rouge">splatter</code>.</p>
+
+<p>In either mode user can make use of the <code class="highlighter-rouge">de-Bruijn</code> graph provided in the github repo in order to generate realistic reads 
+in the following way</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt
+
+</code></pre>
+</div>
+
+<p>Alternatively a <code class="highlighter-rouge">gfa</code> file can be provided to represent <code class="highlighter-rouge">de-Bruijn</code> file.</p>
+
+<h2 id="alevin-mode">Alevin mode</h2>
+<p>Without illumina model</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt
+
+</code></pre>
+</div>
+
+<p>With illumina model</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt --illum ../data/illumina_error_models/ill100v5_mate2
+
+</code></pre>
+</div>
+
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2020 Combine-lab (University Of Maryland). All rights reserved.</span>
+</footer>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/Terminus-tutorial/js/main.js?1580617442968111000"></script>
+
+
+    </div>
+  </body>
+</html>

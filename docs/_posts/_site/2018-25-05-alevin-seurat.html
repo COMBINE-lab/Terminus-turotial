@@ -1,0 +1,62 @@
+<h2 id="alevin-seurat-connection">Alevin-Seurat Connection</h2>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1"># Seurat v3.0.0 and tximport &gt;=1.13.10
+</span><span class="n">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tximport</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1"># path to the output directory of Alevin run of pbmc_1k 10x V2 data
+</span><span class="n">files</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="s2">"alevin_quants/alevin/quants_mat.gz"</span><span class="p">)</span><span class="w">
+</span><span class="n">file.exists</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="s2">"TRUE"</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1"># Reading in the alevin quants quants
+</span><span class="n">txi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tximport</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"alevin"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="s2">"and we are good to go !! Cells after this has been taken from Seurat tutorial:
+https://satijalab.org/seurat/v3.0/pbmc3k_tutorial.html
+Below lines are for example purposes only and could be suboptimal. We recommend
+checking out Seurat tool for more detailed tutorial of the downstream analysis."</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">txi</span><span class="o">$</span><span class="n">counts</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">min.cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">min.features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"10X_PBMC"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">NormalizeData</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">normalization.method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LogNormalize"</span><span class="p">,</span><span class="w"> </span><span class="n">scale.factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">FindVariableFeatures</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">selection.method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vst"</span><span class="p">,</span><span class="w"> </span><span class="n">nfeatures</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="p">)</span><span class="w">
+
+</span><span class="n">all.genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rownames</span><span class="p">(</span><span class="n">pbmc</span><span class="p">)</span><span class="w">
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ScaleData</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all.genes</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">RunPCA</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VariableFeatures</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pbmc</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">FindNeighbors</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w">
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">FindClusters</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">RunUMAP</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">DimPlot</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"umap"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="../../images/output_11_0.png" alt="png" /></p>

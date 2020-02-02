@@ -1,0 +1,55 @@
+<h2 id="alevin-monocle-connection">Alevin-Monocle Connection</h2>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1"># Monocle &gt;3 0 and tximport &gt;1.13.0
+</span><span class="n">library</span><span class="p">(</span><span class="n">tximport</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">monocle3</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1"># path to the output directory of Alevin run of neurons_900 10x V2 data
+</span><span class="n">files</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="s2">"alevin_quants/alevin/quants_mat.gz"</span><span class="p">)</span><span class="w">
+</span><span class="n">file.exists</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+<p>TRUE</p>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1"># Reading in the alevin quants quants
+</span><span class="n">txi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tximport</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"alevin"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="s2">"and we are good to go !! Cells after this has been taken from Monocle tutorial:
+https://cole-trapnell-lab.github.io/monocle3/
+Below lines are for example purposes only and could be suboptimal. We recommend
+checking out Monocle tool for more detailed tutorial of the downstream analysis."</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1"># converting the sparse matrix to dense for monocle parsing.
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">new_cell_data_set</span><span class="p">(</span><span class="n">as.matrix</span><span class="p">(</span><span class="n">txi</span><span class="o">$</span><span class="n">counts</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="c1">## Step 1: Normalize and pre-process the data
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preprocess_cds</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">num_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Step 2: Reduce the dimensions using UMAP
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_dimension</span><span class="p">(</span><span class="n">pbmc</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Step 3: Cluster the cells
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cluster_cells</span><span class="p">(</span><span class="n">pbmc</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Step 4: Learn a graph
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">learn_graph</span><span class="p">(</span><span class="n">pbmc</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Step 5: Order cells
+</span><span class="n">pbmc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">order_cells</span><span class="p">(</span><span class="n">pbmc</span><span class="p">,</span><span class="w"> </span><span class="n">root_cells</span><span class="o">=</span><span class="n">pbmc</span><span class="o">$</span><span class="n">cell</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="w"> </span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot_cells</span><span class="p">(</span><span class="n">pbmc</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+<p><img src="../../images/output_10_1.png" alt="png" /></p>

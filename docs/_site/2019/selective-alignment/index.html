@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>Selective Alignment</title>
+  <meta name="description" content="Fast is Good but Fast and accurate is better !
+
+">
+  <meta name="author" content="Combine-lab (University Of Maryland)">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Selective Alignment">
+  <meta name="twitter:description" content="Fast is Good but Fast and accurate is better !
+
+">
+  
+  <meta name="twitter:creator" content="hrksrkr">
+  
+  <meta name="twitter:image" content="/Terminus-tutorial/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Selective Alignment">
+  <meta property="og:description" content="Fast is Good but Fast and accurate is better !
+
+">
+  <meta property="og:image" content="/Terminus-tutorial/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/Terminus-tutorial/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/Terminus-tutorial/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/Terminus-tutorial/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Terminus-tutorial/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/Terminus-tutorial/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/Terminus-tutorial/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/Terminus-tutorial/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/Terminus-tutorial/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Terminus-tutorial/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/Terminus-tutorial/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/Terminus-tutorial/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/Terminus-tutorial/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/Terminus-tutorial/css/main.css?1580617442968111000">
+  <link rel="canonical" href="http://localhost:4000/Terminus-tutorial/2019/selective-alignment/">
+  <link rel="alternate" type="application/rss+xml" title="Terminus-Tutorial" href="/Terminus-tutorial/feed.xml">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/Terminus-tutorial/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/Terminus-tutorial/" title="link to home of Terminus-Tutorial">
+          <img src="/Terminus-tutorial/images/profile.jpg" class="user-image" alt="My Profile Photo">
+					<img src="/Terminus-tutorial/images/logo.png" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Terminus-Tutorial</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">A support website for Terminus, a tool for finding data-driven, robust transcript groups from RNA-seq data</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/Terminus-tutorial/#blog" title="link to Terminus-Tutorial blog" class="blog-button">Tutorial</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+            
+              <!-- Twitter -->
+              <li class="navigation__item">
+                <a href="http://twitter.com/hrksrkr" title="@hrksrkr on Twitter" target="_blank">
+                  <i class="icon icon-social-twitter"></i>
+                  <span class="label">Twitter</span>
+                </a>
+              </li>
+            
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/COMBINE-lab" title="COMBINE-lab on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+              <!-- Email -->
+              <li class="navigation__item">
+                <a href="mailto:hsarkar@cs.umd.edu" title="Email hsarkar@cs.umd.edu" target="_blank">
+                  <i class="icon icon-mail"></i>
+                  <span class="label">Email</span>
+                </a>
+              </li>
+            
+
+            <!-- RSS -->
+            <!-- <li class="navigation__item">
+              <a href="/Terminus-tutorial/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li> -->
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-10-30 15:04" class="post-meta__date date">30 Oct 2019</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/Terminus-tutorial/tags/#selective-alignment">selective-alignment</a> </span>
+      
+    </div>
+    <h1 class="post-title">Selective Alignment</h1>
+  </header>
+
+  <section class="post">
+    <h2 id="fast-is-good-but-fast-and-accurate-is-better-">Fast is Good but Fast and accurate is better !</h2>
+
+<p>The accuracy of transcript quantification using RNA-seq data depends on many factors, such as the choice of alignment or mapping method and the quantification model being adopted. After investigating the influence of mapping and alignment on the accuracy of transcript quantification in both simulated and experimental data, as well as the effect on subsequent differential expression analysis, we designed selective alignment method which overcomes the shortcomings of lightweight approaches without incurring the computational cost of traditional alignment. Here we give a short tutorial on how to index your genome and transcriptome to get the accurate quantification estimates.</p>
+
+<h3 id="downloading-reference">Downloading Reference</h3>
+
+<p>We are first going to download the reference transcriptome and genome for salmon index. As an example we are downloading the gencode mouse reference</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">wget</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">ebi</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">databases</span><span class="o">/</span><span class="n">gencode</span><span class="o">/</span><span class="n">Gencode_mouse</span><span class="o">/</span><span class="n">release_M23</span><span class="o">/</span><span class="n">gencode</span><span class="o">.</span><span class="n">vM23</span><span class="o">.</span><span class="n">transcripts</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">wget</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">ebi</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">databases</span><span class="o">/</span><span class="n">gencode</span><span class="o">/</span><span class="n">Gencode_mouse</span><span class="o">/</span><span class="n">release_M23</span><span class="o">/</span><span class="n">GRCm38</span><span class="o">.</span><span class="n">primary_assembly</span><span class="o">.</span><span class="n">genome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+</code></pre>
+</div>
+
+<h3 id="installing-salmon">Installing Salmon</h3>
+
+<p>Although there are mutliple ways to download salmon (ex: binary from github, docker image), we are going to install it through conda. Assuming a conda environment is already set up, we can install salmon through following command:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">channel</span> <span class="n">bioconda</span> <span class="n">salmon</span>
+</code></pre>
+</div>
+
+<p>Make sure you have the latest version of salmon (v1.0 as on November 1st, 2019) by using <code class="highlighter-rouge">salmon --version</code></p>
+
+<h3 id="preparing-metadata">Preparing metadata</h3>
+
+<p>Salmon indexing requires the names of the genome targets, which is extractable by using the <code class="highlighter-rouge">grep</code> command:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">grep</span> <span class="s">"^&gt;"</span> <span class="o">&lt;</span><span class="p">(</span><span class="n">gunzip</span> <span class="o">-</span><span class="n">c</span> <span class="n">GRCm38</span><span class="o">.</span><span class="n">primary_assembly</span><span class="o">.</span><span class="n">genome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span><span class="p">)</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span> <span class="s">" "</span> <span class="o">-</span><span class="n">f</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">decoys</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">sed</span> <span class="o">-</span><span class="n">i</span><span class="o">.</span><span class="n">bak</span> <span class="o">-</span><span class="n">e</span> <span class="s">'s/&gt;//g'</span> <span class="n">decoys</span><span class="o">.</span><span class="n">txt</span>
+</code></pre>
+</div>
+
+<p>Along with the list of decoys salmon also needs the concatenated transcriptome and genome reference file for index.
+NOTE: the genome targets (decoys) should come after the transcriptome targets in the reference</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">cat</span> <span class="n">gencode</span><span class="o">.</span><span class="n">vM23</span><span class="o">.</span><span class="n">transcripts</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span> <span class="n">GRCm38</span><span class="o">.</span><span class="n">primary_assembly</span><span class="o">.</span><span class="n">genome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span> <span class="o">&gt;</span> <span class="n">gentrome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span>
+</code></pre>
+</div>
+
+<h3 id="salmon-indexing">Salmon Indexing</h3>
+
+<p>We have all the ingredients ready for the salmon recipe. We can run salmon indexing step as follows:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">salmon</span> <span class="n">index</span> <span class="o">-</span><span class="n">t</span> <span class="n">gentrome</span><span class="o">.</span><span class="n">fa</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">d</span> <span class="n">decoys</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">p</span> <span class="mi">12</span> <span class="o">-</span><span class="n">i</span> <span class="n">salmon_index</span> <span class="o">--</span><span class="n">gencode</span>
+</code></pre>
+</div>
+
+<p>NOTE: <code class="highlighter-rouge">--gencode</code> flag is for removing extra metdata in the target header separated by <code class="highlighter-rouge">|</code> from the gencode reference. You can skip it if using other references.</p>
+
+<h3 id="ipython-notebook">Ipython Notebook</h3>
+<p>Prefer to read ipython notebook ?
+Check out the gist <a href="https://gist.github.com/k3yavi/a486647c35158a8296cec543ed9b526f">here</a>.</p>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2020 Combine-lab (University Of Maryland). All rights reserved.</span>
+</footer>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/Terminus-tutorial/js/main.js?1580617442968111000"></script>
+
+
+    </div>
+  </body>
+</html>

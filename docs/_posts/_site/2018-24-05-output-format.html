@@ -1,0 +1,65 @@
+<h2 id="output-format">Output Format:</h2>
+
+<p>Traditionally single-cell tools dumps the Cell-v-Gene count matrix in various formats. Typical 10x experiment can range form hundreds to tens of thousand of cells – resulting in huge size of count-matrix. Although, this itself is an open area of research but by default alevin dumps a per-cell level gene-count matrix in a binary-compressed format with the row and column indexes in a separate file.</p>
+
+<p>A typical run of alevin will generate 3 files:</p>
+
+<ul>
+  <li><em>quants_mat.gz</em> – Compressed count matrix.</li>
+  <li><em>quants_mat_cols.txt</em> – Column Header (Gene-ids) of the matrix.</li>
+  <li><em>quants_mat_rows.txt</em> – Row Index (CB-ids) of the matrix.</li>
+</ul>
+
+<h2 id="python-import">Python Import</h2>
+<p>Alevin’s per-cell level count matrix can be imported directly into a python dataframe. The following python3 dependency is needed and can be installed using pip as follows:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">pip3</span> <span class="n">install</span> <span class="n">vpolo</span>
+</code></pre>
+</div>
+
+<p>Alternatively, vpolo can be installed using conda as follows:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">bioconda</span> <span class="n">vpolo</span>
+</code></pre>
+</div>
+
+<p>If you want the python code to understand the schema of the binary output, it can be found <a href="https://github.com/k3yavi/vpolo/blob/master/vpolo/alevin/parser.py">here</a></p>
+
+<h3 id="reading-binary-format">Reading Binary format</h3>
+<p>Alevin’s <code class="highlighter-rouge">quants_mat.gz</code> file can be easily imported to generate Cell v Gene dataframe using the following piece of python3 code:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">vpolo.alevin</span> <span class="kn">import</span> <span class="n">parser</span>
+<span class="n">alevin_df</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">read_quants_bin</span><span class="p">(</span><span class="s">"&lt;PATH TO ALEVIN output folder&gt;"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h3 id="pandas-compatibility">Pandas Compatibility:</h3>
+
+<p>Alevin can also dump the count-matrix in a human readable – matrix market exchange (<em>MTX</em>) format, if given flag <code class="highlighter-rouge">--dumpMtx</code>. The new output file <code class="highlighter-rouge">quants_mat.mtx.gz</code> can be easily read-in using the following python-pandas based function:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">mmread</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">mat_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">alevin_df</span> <span class="o">=</span> <span class="n">mmread</span><span class="p">(</span><span class="s">"&lt;PATH TO ALEVIN quants_mat.mtx.gz file&gt;"</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>The above function takes the path of the directory specified in –output directory ( while running the alevin-quantification tool ). Note that if alevin was finished successfully then the above specified directory will contain a directory inside of it with the name <code class="highlighter-rouge">alevin</code> . The function returns a python <code class="highlighter-rouge">dataframe</code> for the count matrix with Cellular-Barcodes as the index and Gene-id as the header which can be used for the downstream analysis.</p>
+
+<h3 id="reading-alevin-umi-graphs">Reading Alevin UMI graphs</h3>
+
+<p>When run with the command line flag <code class="highlighter-rouge">--dumpUmiGraph</code> alevin generates the per cell level Parsimonious Umi Graph (PUGs) into a compressed binary file <code class="highlighter-rouge">cell_umi_graphs.gz</code>. The file can be prased and generate a per cell level <code class="highlighter-rouge">dot</code> graph file using following python script:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">vpolo.alevin</span> <span class="kn">import</span> <span class="n">parser</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">read_umi_graph</span><span class="p">(</span><span class="s">"&lt;PATH to alevin output folder&gt;"</span><span class="p">,</span> <span class="s">"&lt;output folder&gt;"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h3 id="reading-alevins-bfh-big-freaking-hash-file">Reading Alevin’s bfh (big freaking hash) file</h3>
+
+<p>When run with the command line flag <code class="highlighter-rouge">--dumpBfh</code> alevin generates the big hash file used by alevin for performing the deduplication, along with the mapped equivalence classes. The file can be parsed by the following python script:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">vpolo.alevin</span> <span class="kn">import</span> <span class="n">parser</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">read_bfh</span><span class="p">(</span><span class="s">"&lt;PATH to alevin output folder&gt;"</span><span class="p">,</span> <span class="s">"&lt;PATH to t2g file&gt;"</span><span class="p">)</span>
+</code></pre>
+</div>

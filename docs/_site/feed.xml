@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Terminus-Tutorial</title>
+    <description>A support website for Terminus, a tool for finding data-driven, robust transcript groups from RNA-seq data</description>
+    <link>http://localhost:4000/Terminus-tutorial/</link>
+    <atom:link href="http://localhost:4000/Terminus-tutorial/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 01 Feb 2020 23:24:02 -0500</pubDate>
+    <lastBuildDate>Sat, 01 Feb 2020 23:24:02 -0500</lastBuildDate>
+    <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>Running Terminus</title>
+        <description>&lt;h2 id=&quot;uncertainty---the-inevitable-problem-of-rna-seq-data-analysis-&quot;&gt;Uncertainty - the inevitable problem of RNA-seq data analysis !&lt;/h2&gt;
+
+&lt;p&gt;The structure of transcriptomic mapping contains many inherent ambiguousness that arises from shared exons in 
+the isoforms of the same gene, paralogous genes etc. This underlying ambiguity in the sequences directly translates
+in the world in domain of quantification, when there are many equally likely candidate transcript to assign a read to 
+a read to. Maximum likelihood estimation (MLE) based models are prone to favor one of the candidates, leading to a
+wrong solutions.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-terminus&quot;&gt;What is Terminus&lt;/h2&gt;
+
+&lt;p&gt;Terminus is a program for analyzing transcript-level abundance estimates from RNA-seq data, computed using salmon, and collapsing individual transcripts into groups whose total transcriptional output can be estimated more accurately and robustly.&lt;/p&gt;
+
+&lt;h2 id=&quot;approach-of-terminus&quot;&gt;Approach of Terminus&lt;/h2&gt;
+
+&lt;p&gt;Terminus attempts to solve this problem by grouping transcripts by drawing useful information from the posterior
+samples from the quantification model. The groups computed by terminus represent abundance estimation reported at the resolution that is actually supported by the underlying experimental data. In a typical experiment, this is neither at the gene level nor the transcript level. Some transcripts, even from complex, multi-isoform genes, can have their abundances confidently estimated, while other transcripts cannot. Rather than pre-defining the resolution at which the analysis will be performed, and subjecting the results to unnecessary uncertainty or insufficient biological resolution, terminus allows the determination of transcriptional groups that can be confidently ascertained in a given sample, and represents, in this sense, a data-driven approach to transcriptome analysis.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-build-terminus&quot;&gt;How to build terminus&lt;/h2&gt;
+
+&lt;p&gt;Terminus uses the &lt;a href=&quot;https://github.com/rust-lang/cargo&quot;&gt;cargo&lt;/a&gt; build system and package manager. To build terminus from source, you will need to have rust (ideally v1.40 or greater) installed. Then, you can build terminus by executing:&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cargo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;how-terminus-works&quot;&gt;How Terminus works&lt;/h2&gt;
+&lt;p&gt;At this moment Terminus works on the out put of &lt;a href=&quot;&quot;&gt;salmon&lt;/a&gt;. It expects&lt;/p&gt;
+</description>
+        <pubDate>Sat, 01 Feb 2020 10:04:23 -0500</pubDate>
+        <link>http://localhost:4000/Terminus-tutorial/2020/running-terminus/</link>
+        <guid isPermaLink="true">http://localhost:4000/Terminus-tutorial/2020/running-terminus/</guid>
+        
+        <category>Terminus</category>
+        
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Selective Alignment</title>
+        <description>&lt;h2 id=&quot;fast-is-good-but-fast-and-accurate-is-better-&quot;&gt;Fast is Good but Fast and accurate is better !&lt;/h2&gt;
+
+&lt;p&gt;The accuracy of transcript quantification using RNA-seq data depends on many factors, such as the choice of alignment or mapping method and the quantification model being adopted. After investigating the influence of mapping and alignment on the accuracy of transcript quantification in both simulated and experimental data, as well as the effect on subsequent differential expression analysis, we designed selective alignment method which overcomes the shortcomings of lightweight approaches without incurring the computational cost of traditional alignment. Here we give a short tutorial on how to index your genome and transcriptome to get the accurate quantification estimates.&lt;/p&gt;
+
+&lt;h3 id=&quot;downloading-reference&quot;&gt;Downloading Reference&lt;/h3&gt;
+
+&lt;p&gt;We are first going to download the reference transcriptome and genome for salmon index. As an example we are downloading the gencode mouse reference&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wget&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ftp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ftp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ebi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;databases&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gencode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Gencode_mouse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release_M23&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gencode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vM23&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transcripts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gz&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wget&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ftp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ftp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ebi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;databases&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gencode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Gencode_mouse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release_M23&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GRCm38&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primary_assembly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;genome&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gz&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;installing-salmon&quot;&gt;Installing Salmon&lt;/h3&gt;
+
+&lt;p&gt;Although there are mutliple ways to download salmon (ex: binary from github, docker image), we are going to install it through conda. Assuming a conda environment is already set up, we can install salmon through following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;conda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;channel&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bioconda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salmon&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Make sure you have the latest version of salmon (v1.0 as on November 1st, 2019) by using &lt;code class=&quot;highlighter-rouge&quot;&gt;salmon --version&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;preparing-metadata&quot;&gt;Preparing metadata&lt;/h3&gt;
+
+&lt;p&gt;Salmon indexing requires the names of the genome targets, which is extractable by using the &lt;code class=&quot;highlighter-rouge&quot;&gt;grep&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;^&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gunzip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GRCm38&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primary_assembly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;genome&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cut&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decoys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bak&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'s/&amp;gt;//g'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decoys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Along with the list of decoys salmon also needs the concatenated transcriptome and genome reference file for index.
+NOTE: the genome targets (decoys) should come after the transcriptome targets in the reference&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gencode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vM23&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transcripts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GRCm38&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primary_assembly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;genome&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gentrome&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gz&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;salmon-indexing&quot;&gt;Salmon Indexing&lt;/h3&gt;
+
+&lt;p&gt;We have all the ingredients ready for the salmon recipe. We can run salmon indexing step as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;salmon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gentrome&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decoys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salmon_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gencode&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;NOTE: &lt;code class=&quot;highlighter-rouge&quot;&gt;--gencode&lt;/code&gt; flag is for removing extra metdata in the target header separated by &lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt; from the gencode reference. You can skip it if using other references.&lt;/p&gt;
+
+&lt;h3 id=&quot;ipython-notebook&quot;&gt;Ipython Notebook&lt;/h3&gt;
+&lt;p&gt;Prefer to read ipython notebook ?
+Check out the gist &lt;a href=&quot;https://gist.github.com/k3yavi/a486647c35158a8296cec543ed9b526f&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 30 Oct 2019 11:04:23 -0400</pubDate>
+        <link>http://localhost:4000/Terminus-tutorial/2019/selective-alignment/</link>
+        <guid isPermaLink="true">http://localhost:4000/Terminus-tutorial/2019/selective-alignment/</guid>
+        
+        <category>selective-alignment</category>
+        
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Running Minnow</title>
+        <description>&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Minnow is written in C++14 and tested in a ubuntu server, please let us know if you have difficulty compiling it in your own machine.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/COMBINE-lab/minnow.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;minnow
+mkdir build
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build
+cmake ..
+make
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Given the above steps run without error, the binary will be stored within the &lt;code class=&quot;highlighter-rouge&quot;&gt;build/src&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-run-&quot;&gt;How to run ?&lt;/h2&gt;
+
+&lt;h3 id=&quot;simple-runs&quot;&gt;Simple runs&lt;/h3&gt;
+
+&lt;p&gt;Minnow has many options some are basic and some are advanced, the most basic one would require to have a 
+transcript to gene map (a &lt;code class=&quot;highlighter-rouge&quot;&gt;tsv&lt;/code&gt; file) and the reference file in addition to that it needs three different&lt;br /&gt;
+files to generate data from: &lt;code class=&quot;highlighter-rouge&quot;&gt;quants_mat.csv&lt;/code&gt;, a gene to cell count file (comma separated), &lt;code class=&quot;highlighter-rouge&quot;&gt;quants_mat_rows.txt&lt;/code&gt;, 
+and &lt;code class=&quot;highlighter-rouge&quot;&gt;quants_mat_cols.txt&lt;/code&gt;. To list the required files, a complete file tree would look like following,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+-- reference
+|   +-- transcript.fasta
+|   +-- t2g.tsv
++-- experiment
+|   +-- quants_mat.csv
+|   +-- quants_mat_rows.txt
+|   +-- quants_mat_cols.txt 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;The t2g.tsv file contains the transcript to gene information. The csv file is the main matrix file and assumed to be 
+in gene to cell format and comma separated of dimension &lt;code class=&quot;highlighter-rouge&quot;&gt;m * n&lt;/code&gt; where there are &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; genes and &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; cells. In the given setting 
+one must use a &lt;code class=&quot;highlighter-rouge&quot;&gt;quants_mat_rows.txt&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; lines and &lt;code class=&quot;highlighter-rouge&quot;&gt;quants_mat_cols.txt&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt; lines. Not having this convention
+might lead to failure and segmentation faults.&lt;/p&gt;
+
+&lt;p&gt;The matrix can be generated in many ways, like using splatter or any generative model user might want to implement. Given 
+the above format minnow will generate the reads keeping the matrix intact. If not specified otherwise minnow generates 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;100,000&lt;/code&gt; molecules per cell after PCR, but this can be customized by passing the required flag with the program.&lt;/p&gt;
+
+&lt;p&gt;Below we will go over the options that can be provided to minnow in order to get different functionality. Minnow 
+primarily works in two different modes. One where you can provide minnow with a simple matrix and it will with gene 
+and cell information according to above format. Additional files can be obtained from https://github.com/COMBINE-lab/minnow&lt;/p&gt;
+
+&lt;p&gt;We have also linked different files in the main website.&lt;/p&gt;
+
+&lt;h2 id=&quot;basic-mode&quot;&gt;Basic mode&lt;/h2&gt;
+&lt;p&gt;In basic mode minnow takes a set of genes to assign them to whatever gene names that are provided to it. Please note that 
+if you are using real gene names that are present in the reference then please don’t use this mode. Since in that case 
+this mode would reassign those real gene names by it’s own algorithm and the purpose is defeated.&lt;/p&gt;
+
+&lt;p&gt;One the genes are assigned, minnow uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;weibull&lt;/code&gt; distribution to assign reads to the candidate transcripts. A typical 
+command in normal mode might look as follows,&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;src/minnow simulate --normal-mode --g2t /mnt/scratch6/avi/data/cgat/references/metadata/hg_t2g.tsv -m example_data/normal_data_100_Cells_50K_Genes/ --PCR 7 -r /mnt/scratch6/avi/data/cgat/references/txome/hg_transcriptome.fasta -e 0.01 -p 25 -o /mnt/scratch1/avi/minnow/benchmark/ismb_19_runs/splatter_test/100_50K_Genes_pbmc/defaultnorm --useWeibull
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Here the folder &lt;code class=&quot;highlighter-rouge&quot;&gt;example_data/normal_data_100_Cells_50K_Genes/&lt;/code&gt; contains the matrix and the corresponding gene names 
+and cell names in the format shown above.&lt;/p&gt;
+
+&lt;h2 id=&quot;splatter-mode&quot;&gt;Splatter-mode&lt;/h2&gt;
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;splatter-mode&lt;/code&gt; is very similar to the &lt;code class=&quot;highlighter-rouge&quot;&gt;normal-mode&lt;/code&gt; except, the provided matrix comes from &lt;code class=&quot;highlighter-rouge&quot;&gt;splatter&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In either mode user can make use of the &lt;code class=&quot;highlighter-rouge&quot;&gt;de-Bruijn&lt;/code&gt; graph provided in the github repo in order to generate realistic reads 
+in the following way&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Alternatively a &lt;code class=&quot;highlighter-rouge&quot;&gt;gfa&lt;/code&gt; file can be provided to represent &lt;code class=&quot;highlighter-rouge&quot;&gt;de-Bruijn&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;h2 id=&quot;alevin-mode&quot;&gt;Alevin mode&lt;/h2&gt;
+&lt;p&gt;Without illumina model&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;With illumina model&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt --illum ../data/illumina_error_models/ill100v5_mate2
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Mon, 04 Feb 2019 10:04:23 -0500</pubDate>
+        <link>http://localhost:4000/Terminus-tutorial/2019/running-minnow/</link>
+        <guid isPermaLink="true">http://localhost:4000/Terminus-tutorial/2019/running-minnow/</guid>
+        
+        <category>minnow</category>
+        
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+  </channel>
+</rss>

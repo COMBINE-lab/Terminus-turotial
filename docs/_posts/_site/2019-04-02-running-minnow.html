@@ -1,0 +1,90 @@
+<h2 id="installation">Installation</h2>
+
+<p>Minnow is written in C++14 and tested in a ubuntu server, please let us know if you have difficulty compiling it in your own machine.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/COMBINE-lab/minnow.git
+<span class="nb">cd </span>minnow
+mkdir build
+<span class="nb">cd </span>build
+cmake ..
+make
+</code></pre>
+</div>
+<p>Given the above steps run without error, the binary will be stored within the <code class="highlighter-rouge">build/src</code>.</p>
+
+<h2 id="how-to-run-">How to run ?</h2>
+
+<h3 id="simple-runs">Simple runs</h3>
+
+<p>Minnow has many options some are basic and some are advanced, the most basic one would require to have a 
+transcript to gene map (a <code class="highlighter-rouge">tsv</code> file) and the reference file in addition to that it needs three different<br />
+files to generate data from: <code class="highlighter-rouge">quants_mat.csv</code>, a gene to cell count file (comma separated), <code class="highlighter-rouge">quants_mat_rows.txt</code>, 
+and <code class="highlighter-rouge">quants_mat_cols.txt</code>. To list the required files, a complete file tree would look like following,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+-- reference
+|   +-- transcript.fasta
+|   +-- t2g.tsv
++-- experiment
+|   +-- quants_mat.csv
+|   +-- quants_mat_rows.txt
+|   +-- quants_mat_cols.txt 
+</code></pre>
+</div>
+<p>The t2g.tsv file contains the transcript to gene information. The csv file is the main matrix file and assumed to be 
+in gene to cell format and comma separated of dimension <code class="highlighter-rouge">m * n</code> where there are <code class="highlighter-rouge">m</code> genes and <code class="highlighter-rouge">n</code> cells. In the given setting 
+one must use a <code class="highlighter-rouge">quants_mat_rows.txt</code> with <code class="highlighter-rouge">m</code> lines and <code class="highlighter-rouge">quants_mat_cols.txt</code> with <code class="highlighter-rouge">n</code> lines. Not having this convention
+might lead to failure and segmentation faults.</p>
+
+<p>The matrix can be generated in many ways, like using splatter or any generative model user might want to implement. Given 
+the above format minnow will generate the reads keeping the matrix intact. If not specified otherwise minnow generates 
+<code class="highlighter-rouge">100,000</code> molecules per cell after PCR, but this can be customized by passing the required flag with the program.</p>
+
+<p>Below we will go over the options that can be provided to minnow in order to get different functionality. Minnow 
+primarily works in two different modes. One where you can provide minnow with a simple matrix and it will with gene 
+and cell information according to above format. Additional files can be obtained from https://github.com/COMBINE-lab/minnow</p>
+
+<p>We have also linked different files in the main website.</p>
+
+<h2 id="basic-mode">Basic mode</h2>
+<p>In basic mode minnow takes a set of genes to assign them to whatever gene names that are provided to it. Please note that 
+if you are using real gene names that are present in the reference then please don’t use this mode. Since in that case 
+this mode would reassign those real gene names by it’s own algorithm and the purpose is defeated.</p>
+
+<p>One the genes are assigned, minnow uses the <code class="highlighter-rouge">weibull</code> distribution to assign reads to the candidate transcripts. A typical 
+command in normal mode might look as follows,</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --normal-mode --g2t /mnt/scratch6/avi/data/cgat/references/metadata/hg_t2g.tsv -m example_data/normal_data_100_Cells_50K_Genes/ --PCR 7 -r /mnt/scratch6/avi/data/cgat/references/txome/hg_transcriptome.fasta -e 0.01 -p 25 -o /mnt/scratch1/avi/minnow/benchmark/ismb_19_runs/splatter_test/100_50K_Genes_pbmc/defaultnorm --useWeibull
+
+</code></pre>
+</div>
+<p>Here the folder <code class="highlighter-rouge">example_data/normal_data_100_Cells_50K_Genes/</code> contains the matrix and the corresponding gene names 
+and cell names in the format shown above.</p>
+
+<h2 id="splatter-mode">Splatter-mode</h2>
+<p>The <code class="highlighter-rouge">splatter-mode</code> is very similar to the <code class="highlighter-rouge">normal-mode</code> except, the provided matrix comes from <code class="highlighter-rouge">splatter</code>.</p>
+
+<p>In either mode user can make use of the <code class="highlighter-rouge">de-Bruijn</code> graph provided in the github repo in order to generate realistic reads 
+in the following way</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt
+
+</code></pre>
+</div>
+
+<p>Alternatively a <code class="highlighter-rouge">gfa</code> file can be provided to represent <code class="highlighter-rouge">de-Bruijn</code> file.</p>
+
+<h2 id="alevin-mode">Alevin mode</h2>
+<p>Without illumina model</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt
+
+</code></pre>
+</div>
+
+<p>With illumina model</p>
+
+<div class="language-console highlighter-rouge"><pre class="highlight"><code>src/minnow simulate --splatter-mode --g2t /mnt/scratch7/hirak/mm/mm_t2g.tsv -m /mnt/scratch7/hirak/descend_matrices/parametric_sim/ --PCR 7 -r /mnt/scratch7/hirak/mm/mm_transcriptome_fixed.dedup.fasta  -e 0.01 -p 25 -o /mnt/scratch7/hirak/descend_matrices/parametric_sim/dbg2  --dbg --gfa /mnt/scratch7/hirak/mm/mm.gfa --bfh /mnt/scratch7/hirak/mm/bfh.txt --uniq /mnt/scratch7/hirak/mm/mm_101_stranded_gene_uniqueness.txt --illum ../data/illumina_error_models/ill100v5_mate2
+
+</code></pre>
+</div>
+
