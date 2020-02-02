@@ -32,4 +32,17 @@ $ cargo build --release
 ```
 
 ## How Terminus works
-At this moment Terminus works on the out put of [salmon](). It expects 
+At this moment Terminus works on the output of [salmon](https://github.com/COMBINE-lab/salmon). Additionally 
+salmon should be run with `--numGibbsSamples <number of samples>` so that it writes the posterior gibbs samples. Terminus
+works with two subcommands, `group` and `collapse`.
+```python
+terminus group -m <float> --tolerance <float> -d <salmon_dir> -o <out_dir>
+```
+For collapsing,
+
+```python
+terminus collapse -c <float> -d <salmon_dir> -o <out_dir>
+```
+
+Note that terminus first writes some auxiliary files in the `<out_dir>` then in the collapsing phase writes down the final
+quantification values along with the 
