@@ -45,4 +45,4 @@ terminus collapse -c <float> -d <salmon_dir> -o <out_dir>
 ```
 
 Note that terminus first writes some auxiliary files in the `<out_dir>` then in the collapsing phase writes down the final
-quantification values along with the 
+quantification values along with the

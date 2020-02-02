@@ -2,7 +2,7 @@
 title: Terminus-Tutorial
 description: 'A support website for Terminus, a tool for finding data-driven, robust transcript groups from RNA-seq data'
 url: 'https://combine-lab.github.io'
-baseurl: '/Terminus-tutorial'
+baseurl: '/terminus-tutorial'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
 
