@@ -31,7 +31,7 @@ $ cargo build --release
 
 ## How Terminus works
 At this moment Terminus works on the output of [salmon](https://github.com/COMBINE-lab/salmon). Additionally 
-salmon should be run with `--numGibbsSamples <number of samples>` so that it writes the posterior gibbs samples. Terminus
+salmon should be run with `--numGibbsSamples <number of samples>` so that it writes the posterior gibbs samples. Additionally there is also `-d` command that needs to be provided for for writing the equivalence classes to the output, that is later used by Terminus. Terminus
 works with two subcommands, `group` and `collapse`.
 ```bash
 terminus group -m <float> --tolerance <float> -d <salmon_dir> -o <out_dir>
