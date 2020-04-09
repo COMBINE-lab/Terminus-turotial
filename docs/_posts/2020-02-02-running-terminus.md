@@ -6,7 +6,7 @@ tags: [Terminus]
 ---
 
 ## <span style="color:red"> Scripts for reproducing the the plots from the manuscript \[**New**\] </span>
-Please follow the notebooks in [terminus-scripts](https://github.com/COMBINE-lab/terminus-paper-scripts) for producing the plots from the manuscript. This includes detailed steps from running `salmon` and `mmcollapse` along with specific parameters used in `terminus`.
+Please follow the notebooks in [terminus-scripts](https://github.com/COMBINE-lab/terminus-paper-scripts/tree/master/notebook) for producing the plots from the manuscript. This includes detailed steps from running `salmon` and `mmcollapse` along with specific parameters used in `terminus`.
 
 
 ## A challenge for accurate RNA-seq analysis

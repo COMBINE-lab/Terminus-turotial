@@ -5,14 +5,14 @@
     <description>A support website for Terminus, a tool for finding data-driven, robust transcript groups from RNA-seq data</description>
     <link>http://localhost:4000/terminus-tutorial/</link>
     <atom:link href="http://localhost:4000/terminus-tutorial/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 09 Apr 2020 15:07:00 -0400</pubDate>
-    <lastBuildDate>Thu, 09 Apr 2020 15:07:00 -0400</lastBuildDate>
+    <pubDate>Thu, 09 Apr 2020 15:11:42 -0400</pubDate>
+    <lastBuildDate>Thu, 09 Apr 2020 15:11:42 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>Running Terminus</title>
         <description>&lt;h2 id=&quot;-scripts-for-reproducing-the-the-plots-from-the-manuscript-new-&quot;&gt;&lt;span style=&quot;color:red&quot;&gt; Scripts for reproducing the the plots from the manuscript [&lt;strong&gt;New&lt;/strong&gt;] &lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;Please follow the notebooks in &lt;a href=&quot;https://github.com/COMBINE-lab/terminus-paper-scripts&quot;&gt;terminus-scripts&lt;/a&gt; for producing the plots from the manuscript. This includes detailed steps from running &lt;code class=&quot;highlighter-rouge&quot;&gt;salmon&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;mmcollapse&lt;/code&gt; along with specific parameters used in &lt;code class=&quot;highlighter-rouge&quot;&gt;terminus&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Please follow the notebooks in &lt;a href=&quot;https://github.com/COMBINE-lab/terminus-paper-scripts/tree/master/notebook&quot;&gt;terminus-scripts&lt;/a&gt; for producing the plots from the manuscript. This includes detailed steps from running &lt;code class=&quot;highlighter-rouge&quot;&gt;salmon&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;mmcollapse&lt;/code&gt; along with specific parameters used in &lt;code class=&quot;highlighter-rouge&quot;&gt;terminus&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;a-challenge-for-accurate-rna-seq-analysis&quot;&gt;A challenge for accurate RNA-seq analysis&lt;/h2&gt;
 
