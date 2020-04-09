@@ -7,8 +7,8 @@
   
 
   <title>Running Terminus</title>
-  <meta name="description" content="Uncertainty - the inevitable problem of RNA-seq data analysis !
-
+  <meta name="description" content=" Scripts for reproducing the the plots from the manuscript [New] 
+Please follow the notebooks in terminus-scripts for producing the plots from the manuscript. This includes detailed steps from running salmon and mmcollapse along with specific parameters used in terminus.
 ">
   <meta name="author" content="Combine-lab (University Of Maryland)">
   <meta name="HandheldFriendly" content="True">
@@ -19,44 +19,44 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Running Terminus">
-  <meta name="twitter:description" content="Uncertainty - the inevitable problem of RNA-seq data analysis !
-
+  <meta name="twitter:description" content=" Scripts for reproducing the the plots from the manuscript [New] 
+Please follow the notebooks in terminus-scripts for producing the plots from the manuscript. This includes detailed steps from running salmon and mmcollapse along with specific parameters used in terminus.
 ">
   
   <meta name="twitter:creator" content="hrksrkr">
   
-  <meta name="twitter:image" content="/Terminus-tutorial/images/favicons/favicon-194x194.png" />
+  <meta name="twitter:image" content="/terminus-tutorial/images/favicons/favicon-194x194.png" />
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Running Terminus">
-  <meta property="og:description" content="Uncertainty - the inevitable problem of RNA-seq data analysis !
-
+  <meta property="og:description" content=" Scripts for reproducing the the plots from the manuscript [New] 
+Please follow the notebooks in terminus-scripts for producing the plots from the manuscript. This includes detailed steps from running salmon and mmcollapse along with specific parameters used in terminus.
 ">
-  <meta property="og:image" content="/Terminus-tutorial/images/favicons/favicon-194x194.png" />
+  <meta property="og:image" content="/terminus-tutorial/images/favicons/favicon-194x194.png" />
 
-  <link rel="apple-touch-icon" sizes="57x57" href="/Terminus-tutorial/images/favicons/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/Terminus-tutorial/images/favicons/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/Terminus-tutorial/images/favicons/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/Terminus-tutorial/images/favicons/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/Terminus-tutorial/images/favicons/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/Terminus-tutorial/images/favicons/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/Terminus-tutorial/images/favicons/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/Terminus-tutorial/images/favicons/apple-touch-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Terminus-tutorial/images/favicons/apple-touch-icon-180x180.png">
-  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-194x194.png" sizes="194x194">
-  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/android-chrome-192x192.png" sizes="192x192">
-  <link rel="icon" type="image/png" href="/Terminus-tutorial/images/favicons/favicon-16x16.png" sizes="16x16">
-  <link rel="manifest" href="/Terminus-tutorial/images/favicons/manifest.json">
-  <link rel="shortcut icon" href="/Terminus-tutorial/images/favicons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="/terminus-tutorial/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/terminus-tutorial/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/terminus-tutorial/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/terminus-tutorial/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/terminus-tutorial/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/terminus-tutorial/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/terminus-tutorial/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/terminus-tutorial/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/terminus-tutorial/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/terminus-tutorial/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/terminus-tutorial/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/terminus-tutorial/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/terminus-tutorial/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/terminus-tutorial/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/terminus-tutorial/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/terminus-tutorial/images/favicons/favicon.ico">
   <meta name="msapplication-TileColor" content="#ffc40d">
-  <meta name="msapplication-TileImage" content="/Terminus-tutorial/images/favicons/mstile-144x144.png">
+  <meta name="msapplication-TileImage" content="/terminus-tutorial/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/Terminus-tutorial/css/main.css?1580617442968111000">
-  <link rel="canonical" href="http://localhost:4000/Terminus-tutorial/2020/running-terminus/">
-  <link rel="alternate" type="application/rss+xml" title="Terminus-Tutorial" href="/Terminus-tutorial/feed.xml">
+  <link rel="stylesheet" href="/terminus-tutorial/css/main.css?1586459220761790000">
+  <link rel="canonical" href="http://localhost:4000/terminus-tutorial/2020/running-terminus/">
+  <link rel="alternate" type="application/rss+xml" title="Terminus-Tutorial" href="/terminus-tutorial/feed.xml">
 </head>
 
 
@@ -66,14 +66,14 @@
   <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
 </span>
 
-<header class="panel-cover" style="background-image: url(/Terminus-tutorial/images/cover.jpg)">
+<header class="panel-cover" style="background-image: url(/terminus-tutorial/images/cover.jpg)">
   <div class="panel-main">
 
     <div class="panel-main__inner panel-inverted">
     <div class="panel-main__content">
-        <a href="/Terminus-tutorial/" title="link to home of Terminus-Tutorial">
-          <img src="/Terminus-tutorial/images/profile.jpg" class="user-image" alt="My Profile Photo">
-					<img src="/Terminus-tutorial/images/logo.png" class="user-image" alt="My Profile Photo">
+        <a href="/terminus-tutorial/#blog" title="link to home of /terminus-tutorial/#blog">
+          <img src="/terminus-tutorial/images/profile.jpg" class="user-image" alt="My Profile Photo">
+					<img src="/terminus-tutorial/images/logo.png" class="user-image" alt="My Profile Photo">
           <h1 class="panel-cover__title panel-title">Terminus-Tutorial</h1>
         </a>
         <hr class="panel-cover__divider">
@@ -84,7 +84,7 @@
 
           <nav class="cover-navigation cover-navigation--primary">
             <ul class="navigation">
-              <li class="navigation__item"><a href="/Terminus-tutorial/#blog" title="link to Terminus-Tutorial blog" class="blog-button">Tutorial</a></li>
+              <li class="navigation__item"><a href="/terminus-tutorial/tags/#Terminus" title="link to Terminus-Tutorial blog" class="blog-button">Tutorial</a></li>
             </ul>
           </nav>
 
@@ -127,7 +127,7 @@
 
             <!-- RSS -->
             <!-- <li class="navigation__item">
-              <a href="/Terminus-tutorial/feed.xml" title="Subscribe" target="_blank">
+              <a href="/terminus-tutorial/feed.xml" title="Subscribe" target="_blank">
                 <i class="icon icon-rss"></i>
                 <span class="label">RSS</span>
               </a>
@@ -152,41 +152,95 @@
         <article class="post-container post-container--single">
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2020-02-01 15:04" class="post-meta__date date">1 Feb 2020</time>
+      <time datetime="2020-02-01 10:04" class="post-meta__date date">1 Feb 2020</time>
       
-      &#8226; <span class="post-meta__tags">on <a href="/Terminus-tutorial/tags/#Terminus">Terminus</a> </span>
+      &#8226; <span class="post-meta__tags">on <a href="/terminus-tutorial/tags/#Terminus">Terminus</a> </span>
       
     </div>
     <h1 class="post-title">Running Terminus</h1>
   </header>
 
   <section class="post">
-    <h2 id="uncertainty---the-inevitable-problem-of-rna-seq-data-analysis-">Uncertainty - the inevitable problem of RNA-seq data analysis !</h2>
+    <h2 id="-scripts-for-reproducing-the-the-plots-from-the-manuscript-new-"><span style="color:red"> Scripts for reproducing the the plots from the manuscript [<strong>New</strong>] </span></h2>
+<p>Please follow the notebooks in <a href="https://github.com/COMBINE-lab/terminus-paper-scripts">terminus-scripts</a> for producing the plots from the manuscript. This includes detailed steps from running <code class="highlighter-rouge">salmon</code> and <code class="highlighter-rouge">mmcollapse</code> along with specific parameters used in <code class="highlighter-rouge">terminus</code>.</p>
 
-<p>The structure of transcriptomic mapping contains many inherent ambiguousness that arises from shared exons in 
-the isoforms of the same gene, paralogous genes etc. This underlying ambiguity in the sequences directly translates
-in the world in domain of quantification, when there are many equally likely candidate transcript to assign a read to 
-a read to. Maximum likelihood estimation (MLE) based models are prone to favor one of the candidates, leading to a
-wrong solutions.</p>
+<h2 id="a-challenge-for-accurate-rna-seq-analysis">A challenge for accurate RNA-seq analysis</h2>
 
-<h2 id="what-is-terminus">What is Terminus</h2>
+<p>RNA-seq analysis is most often carried out at the gene level, which can provide robust estimates of the total
+transcriptional output of a set of related transcripts, but which can mask differences in differential isoform usage
+between conditions.  Moreover, in the presence of highly-sequence-similar gene families, these estimates may not 
+be accurate.  On the other hand, transcript-level analysis provides exquisite biological resolution, but is often beyond
+the bounds of robust inference for some fraction of the transcriptome.  In such cases, maximum likelihood estimation (MLE)-based models are prone to return a high-likelihood but likely incorrect solution.  Such ambiguity is inherent in the RNA-seq data and in the inference challenge it poses, and results chiefly from multi-mapping reads induced by sequence similarity between transcripts due either to alternative splicing or to sequence-similarity among related genes within larger gene families.</p>
 
-<p>Terminus is a program for analyzing transcript-level abundance estimates from RNA-seq data, computed using salmon, and collapsing individual transcripts into groups whose total transcriptional output can be estimated more accurately and robustly.</p>
+<h2 id="what-is-terminus">What is Terminus?</h2>
+
+<p>Terminus is a program that implements a new method for analyzing transcript-level abundance estimates from RNA-seq data. Terminus works downstream of salmon, and collapses individual transcripts into groups whose total transcriptional output can be estimated more accurately and robustly.</p>
 
 <h2 id="approach-of-terminus">Approach of Terminus</h2>
 
-<p>Terminus attempts to solve this problem by grouping transcripts by drawing useful information from the posterior
-samples from the quantification model. The groups computed by terminus represent abundance estimation reported at the resolution that is actually supported by the underlying experimental data. In a typical experiment, this is neither at the gene level nor the transcript level. Some transcripts, even from complex, multi-isoform genes, can have their abundances confidently estimated, while other transcripts cannot. Rather than pre-defining the resolution at which the analysis will be performed, and subjecting the results to unnecessary uncertainty or insufficient biological resolution, terminus allows the determination of transcriptional groups that can be confidently ascertained in a given sample, and represents, in this sense, a data-driven approach to transcriptome analysis.</p>
+<p>Terminus attempts to solve this problem of grouping transcripts by using information drawn from the posterior distribution of transcript abundance estimates (i.e. Gibbs samples), not just the point estimate. The groups computed by terminus represent abundance estimation reported at the resolution that is actually supported by the underlying experimental data. In a typical experiment, this is neither at the gene level nor the transcript level. Some transcripts, even from complex, multi-isoform genes, can have their abundances confidently estimated, while other transcripts cannot. Rather than pre-defining the resolution at which the analysis will be performed, and subjecting the results to unnecessary uncertainty or insufficient biological resolution, terminus allows the determination of transcriptional groups that can be confidently ascertained in a given sample, and represents, in this sense, a data-driven approach to transcriptome analysis.</p>
 
 <h2 id="how-to-build-terminus">How to build terminus</h2>
 
 <p>Terminus uses the <a href="https://github.com/rust-lang/cargo">cargo</a> build system and package manager. To build terminus from source, you will need to have rust (ideally v1.40 or greater) installed. Then, you can build terminus by executing:</p>
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="err">$</span> <span class="n">cargo</span> <span class="n">build</span> <span class="o">--</span><span class="n">release</span>
-</code></pre>
-</div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cargo</span> <span class="n">build</span> <span class="o">--</span><span class="n">release</span>
+</code></pre></div></div>
 
 <h2 id="how-terminus-works">How Terminus works</h2>
-<p>At this moment Terminus works on the out put of <a href="">salmon</a>. It expects</p>
+<p>At this moment Terminus works on the output of <a href="https://github.com/COMBINE-lab/salmon">salmon</a>. Additionally 
+salmon should be run with <code class="highlighter-rouge">--numGibbsSamples &lt;number of samples&gt;</code> so that it writes the posterior Gibbs samples. Additionally there is also <code class="highlighter-rouge">-d</code> command that needs to be provided for for writing the equivalence classes to the output, that is later used by Terminus. Terminus
+works with two subcommands, <code class="highlighter-rouge">group</code> and <code class="highlighter-rouge">collapse</code>.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">terminus</span> <span class="n">group</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">float</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">tolerance</span> <span class="o">&lt;</span><span class="n">float</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">salmon_dir</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">out_dir</span><span class="o">&gt;</span>
+</code></pre></div></div>
+<p>For collapsing,</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">terminus</span> <span class="n">collapse</span> <span class="o">-</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">float</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">salmon_dir</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">out_dir</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Note that terminus first writes some auxiliary files in the <code class="highlighter-rouge">&lt;out_dir&gt;</code> and afterwards in the collapsing phase writes down the final collapsed quantification values along with other metadata files.</p>
+
+<h2 id="how-to-use-deseq2-in-the-downstream-to-identify-differentially-expressed-groups">How to use DESeq2 in the downstream to identify differentially expressed groups</h2>
+
+<p>Currently the transcript to group mapping can be used as a proxy for finding out gene level differentially expressed groups. The trick is to use the <code class="highlighter-rouge">tximport</code> module originally intended for converting transcript level expression to gene level expression.</p>
+
+<p>To create the transcript to group csv file (as a proxy to the transcript to gene csv file)</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">extract_txp_group</span><span class="p">.</span><span class="nf">py</span> <span class="o">&lt;</span><span class="n">salmon_quant_file</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">terminus_out</span><span class="o">&gt;</span><span class="sr">/cluster.txt txp.group.csv
+</span></code></pre></div></div>
+
+<p>This <code class="highlighter-rouge">txp.group.csv</code> can be then used in <code class="highlighter-rouge">DESeq2</code> as follows. Given the 4x4 polyester samples discussed in the manuscript a typical pipeline for DE analysis would go as follows,</p>
+
+<p>The required packages are,</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tximport</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">DESeq2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>Check the existence of files</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">csv.dir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"/mnt/scratch1/hirak/ASE_Analysis/simulation/deseq2"</span><span class="w">
+</span><span class="n">samps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">file.path</span><span class="p">(</span><span class="n">csv.dir</span><span class="p">,</span><span class="s2">"samples.csv"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">files</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="s2">"/mnt/scratch1/hirak/ASE_Analysis/simulation/quant_witohut_decoy"</span><span class="p">,</span><span class="w"> </span><span class="n">samps</span><span class="o">$</span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="s2">"quant.sf"</span><span class="p">)</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">samps</span><span class="o">$</span><span class="n">sample_id</span><span class="w">
+</span><span class="nf">all</span><span class="p">(</span><span class="n">file.exists</span><span class="p">(</span><span class="n">files</span><span class="p">))</span><span class="w">
+
+</span><span class="n">tx2gene</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="w">
+    </span><span class="n">file.path</span><span class="p">(</span><span class="s2">"/mnt/scratch1/hirak/ASE_Analysis/simulation/deseq2/txp2group.csv"</span><span class="p">),</span><span class="w">
+    </span><span class="n">col_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"TNAME"</span><span class="p">,</span><span class="s2">"GNAME"</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">tx2gene</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">txi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tximport</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"salmon"</span><span class="p">,</span><span class="w"> </span><span class="n">tx2gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tx2gene</span><span class="p">,</span><span class="w"> </span><span class="n">countsFromAbundance</span><span class="o">=</span><span class="s2">"lengthScaledTPM"</span><span class="p">)</span><span class="w">
+</span><span class="n">dds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">DESeqDataSetFromTximport</span><span class="p">(</span><span class="n">txi</span><span class="p">,</span><span class="w"> </span><span class="n">samps</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="n">condition</span><span class="p">)</span><span class="w">
+</span><span class="n">dds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">DESeq</span><span class="p">(</span><span class="n">dds</span><span class="p">)</span><span class="w">
+</span><span class="n">dres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">DESeq2</span><span class="o">::</span><span class="n">results</span><span class="p">(</span><span class="n">dds</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">dds</code> and <code class="highlighter-rouge">dres</code> are general DESeq2 objects that can further be analyzed as described in <a href="http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">Analyzing RNA-seq data with DESeq2</a>.</p>
+
 
   </section>
   
@@ -201,7 +255,7 @@ samples from the quantification model. The groups computed by terminus represent
 </footer>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/Terminus-tutorial/js/main.js?1580617442968111000"></script>
+<script type="text/javascript" src="/terminus-tutorial/js/main.js?1586459220761790000"></script>
 
 
     </div>

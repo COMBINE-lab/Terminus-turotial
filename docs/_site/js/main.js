@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('.panel-cover').addClass('panel-cover--collapsed')
   }
 
-  if (window.location.pathname !== '/Terminus-tutorial/' && window.location.pathname !== '/Terminus-tutorial/index.html') {
+  if (window.location.pathname !== '/terminus-tutorial/' && window.location.pathname !== '/terminus-tutorial/index.html') {
     $('.panel-cover').addClass('panel-cover--collapsed')
   }
 
